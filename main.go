@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"prakerja/configs"
 	"prakerja/routes"
 )
@@ -8,6 +9,9 @@ import (
 func main() {
 	configs.InitDB()
 	e := routes.InitRoute()
-	// start the server, and log if it fails
-	e.Logger.Fatal(e.Start(":8080"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	e.Logger.Fatal(e.Start(":" + port))
 }
