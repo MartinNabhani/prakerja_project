@@ -40,7 +40,7 @@ func GetSiswaByID(c echo.Context) error {
 func CreateSiswaController(c echo.Context) error {
 	student := models.Student{}
 	c.Bind(&student)
-	if err := configs.DB.Save(&student).Error; err != nil {
+	if err := configs.DB.Create(&student).Error; err != nil {
 		return c.JSON(http.StatusInternalServerError, models.BaseResponse{
 			Status: false, Message: "Gagal Create User", Data: nil,
 		})
